@@ -5,7 +5,6 @@ import android.os.SystemClock
 import android.util.Log
 import com.aliyun.sls.android.producer.LogProducerClient
 import com.aliyun.sls.android.producer.LogProducerConfig
-import com.aliyun.sls.android.producer.LogProducerResult
 import java.io.File
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -99,7 +98,7 @@ object AliyunLogUtil {
     private fun createClient() {
         // 回调函数不填，默认无回调
         // 未找到老版本的鉴权过期（Unauthorized）错误码，所以暂时无法做成被动式
-        mClient = LogProducerClient(mConfig) { resultCode, reqId, errorMessage, logBytes, compressedBytes -> // 回调
+        mClient = LogProducerClient(mConfig) /*{ resultCode, reqId, errorMessage, logBytes, compressedBytes -> // 回调
             // resultCode       返回结果代码
             // reqId            请求id
             // errorMessage     错误信息，没有为null
@@ -121,10 +120,10 @@ object AliyunLogUtil {
             }
             // {"errorCode":"Unauthorized","errorMessage":"The security token you provided has expired"}
             // LOG_PRODUCER_SEND_UNAUTHORIZED
-            /*if (LogProducerResult.fromInt(resultCode) == LogProducerResult.LOG_PRODUCER_SEND_UNAUTHORIZED) {
+            if (LogProducerResult.fromInt(resultCode) == LogProducerResult.LOG_PRODUCER_SEND_UNAUTHORIZED) {
                 updateToken()
-            }*/
-        }
+            }
+        }*/
         i("日志系统初始化成功")
     }
 
@@ -148,7 +147,7 @@ object AliyunLogUtil {
             }
             sendCacheLog()
         }
-        //nextUpdateToken(sts != null)
+        nextUpdateToken(sts != null)
     }
 
     private fun nextUpdateToken(isCurrentSuccessful: Boolean): Unit {
@@ -193,7 +192,7 @@ object AliyunLogUtil {
         }
         // 上传
         if (priority >= uploadLevel) {
-            pushLog(logString, getLevelString(priority))
+            pushLog(if (priority >= Log.WARN) logString else log, getLevelString(priority))
         }
     }
 

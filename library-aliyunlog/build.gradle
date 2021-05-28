@@ -37,4 +37,4 @@ dependencies {
 }
 
 //====以下是将android library上传到mavenCenter的脚本
-apply from: "mavenCentralUpload.gradle"
+apply from: "../mavenCentralUpload.gradle"

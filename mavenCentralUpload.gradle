@@ -1,0 +1,41 @@
+apply plugin: 'maven-publish'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+def username = properties.getProperty("maven.ishow.username")
+def password = properties.getProperty("maven.ishow.password")
+
+
+afterEvaluate {
+    task generateSourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        classifier 'sources'
+    }
+
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+
+                // You can then customize attributes of the publication as shown below.
+                groupId = 'com.ishow.android'
+                artifactId = project.getName()
+                version = rootProject.ext.versionName
+                artifact generateSourcesJar
+            }
+        }
+        repositories {
+            maven {
+                allowInsecureProtocol = true
+                url = 'http://maven.aixiuyingyu.com/repository/android-release/'
+                credentials {
+                    it.username username
+                    it.password password
+                }
+            }
+        }
+    }
+}
