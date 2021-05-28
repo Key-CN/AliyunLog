@@ -1,0 +1,5 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.AliyunLog" parent="Theme.AppCompat.Light">
+    </style>
+</resources>

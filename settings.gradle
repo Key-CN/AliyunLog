@@ -1,0 +1,3 @@
+rootProject.name = "AliyunLog"
+include ':app'
+include ':library-aliyunlog'
