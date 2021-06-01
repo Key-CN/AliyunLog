@@ -24,6 +24,9 @@ class MainActivity : AppCompatActivity() {
                 it.addTag("VersionCode", "${BuildConfig.VERSION_CODE}")
             },
             {
+                it.putContent("ABC", "DEF")
+            },
+            {
                 try {
                     Util.getSTS()
                 } catch (e: Exception) {

@@ -33,8 +33,8 @@ android {
 
 dependencies {
     // 阿里云日志
-    api 'com.aliyun.openservices:aliyun-log-android-sdk:2.5.15'
+    api 'com.aliyun.openservices:aliyun-log-android-sdk:2.5.16'
 }
 
-//====以下是将android library上传到mavenCenter的脚本
-apply from: "../mavenCentralUpload.gradle"
+//====将library上传到iShow的mavenCenter的脚本
+apply from: "../../public/iShowMavenCentralUpload.gradle"
