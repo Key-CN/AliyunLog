@@ -10,4 +10,4 @@ api 'com.aliyun.openservices:aliyun-log-android-sdk:2.5.16'
 
 项目太多为了方便同步修改使用
 
-已迁移至```https://github.com/Key-CN/android-common-library.git```
+已迁移至<https://github.com/Key-CN/android-common-library>
